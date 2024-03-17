@@ -47,9 +47,9 @@ public class Main {
         String code;
         int fullMark;
         try {
-             name = subjectData[0];
-             code = subjectData[1];
-             fullMark = Integer.parseInt(subjectData[2]);
+             name = subjectData[0].trim();
+             code = subjectData[1].trim();
+             fullMark = Integer.parseInt(subjectData[2].trim());
         }catch (Exception e) {
             System.out.println("Invalid subject data: " + subjectLine);
             System.out.println("Reason: The full mark should be an integer.");
@@ -83,12 +83,12 @@ public class Main {
             int midMarks;
             int finalMarks;
             try{
-                 name = studentData[0];
-                 number = studentData[1];
-                 activityMarks = Integer.parseInt(studentData[2]);
-                 oralMarks = Integer.parseInt(studentData[3]);
-                 midMarks = Integer.parseInt(studentData[4]);
-                 finalMarks = Integer.parseInt(studentData[5]);
+                 name = studentData[0].trim();
+                 number = studentData[1].trim();
+                 activityMarks = Integer.parseInt(studentData[2].trim());
+                 oralMarks = Integer.parseInt(studentData[3].trim());
+                 midMarks = Integer.parseInt(studentData[4].trim());
+                 finalMarks = Integer.parseInt(studentData[5].trim());
             }
             catch (Exception e) {
                 System.out.println("Invalid student data: " + line);
@@ -144,12 +144,18 @@ public class Main {
         }
     }
     public static void writeSubject(BufferedWriter writer, Subject subject) throws IOException {
+        if (subject == null) {
+            return;
+        }
         writer.write("Subject Name: " + subject.getName());
         writer.newLine();
         writer.write("Max Mark: " + subject.getFullMark());
         writer.newLine();
     }
     public static void writeStudents(BufferedWriter writer, List<Student> students) throws IOException {
+        if (students == null || students.isEmpty()) {
+            return;
+        }
         writer.write("Student name  Student number  GPA  Grade");
         writer.newLine();
         for (Student student : students) {

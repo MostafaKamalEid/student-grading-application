@@ -12,7 +12,7 @@ public class StudentValidator {
 
     //. Student number: the length of this field must be Alphanumeric characters of exact
     //length of 8 characters. It should start with numbers and might End with only one
-    //Alphabetic character (e.g. 12345678A).
+    //Alphabetic character (e.g. 1234567A).
     public static boolean validateNumber(String number) {
         if (number == null || number.isEmpty() || number.isBlank()) {
             return false;
