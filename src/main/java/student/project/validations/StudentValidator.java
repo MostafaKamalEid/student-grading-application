@@ -1,6 +1,6 @@
 package student.project.validations;
 
-public class StudentValidation {
+public class StudentValidator {
     // Student name: It must be Alphabetic characters and Spaces. the name should not
     //start with space.
      public static boolean validateName(String name) {

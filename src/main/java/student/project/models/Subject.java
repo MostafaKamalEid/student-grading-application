@@ -1,5 +1,7 @@
 package student.project.models;
 
+import student.project.validations.SubjectValidator;
+
 public class Subject {
     private String name;
     private String code;
@@ -9,9 +11,10 @@ public class Subject {
     }
 
     public Subject(String name, String code, int fullMark) {
-        this.name = name;
-        this.code = code;
-        this.fullMark = fullMark;
+        // use setters to set the values of the fields
+        setName(name);
+        setCode(code);
+        setFullMark(fullMark);
     }
 
     public String getName() {
@@ -19,6 +22,10 @@ public class Subject {
     }
 
     public void setName(String name) {
+        // validate the name using SubjectValidator
+        if (!SubjectValidator.validateName(name)) {
+            throw new IllegalArgumentException("Invalid name");
+        }
         this.name = name;
     }
 
@@ -27,6 +34,10 @@ public class Subject {
     }
 
     public void setCode(String code) {
+        // validate the code using SubjectValidator
+        if (!SubjectValidator.validateCode(code)) {
+            throw new IllegalArgumentException("Invalid code");
+        }
         this.code = code;
     }
 
@@ -35,6 +46,10 @@ public class Subject {
     }
 
     public void setFullMark(int fullMark) {
+        // validate the full mark using SubjectValidator
+        if (!SubjectValidator.validateFullMark(fullMark)) {
+            throw new IllegalArgumentException("Invalid full mark");
+        }
         this.fullMark = fullMark;
     }
 
