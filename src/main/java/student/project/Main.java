@@ -106,9 +106,6 @@ public class Main {
             }
         }
         // check unique student numbers
-        // remove students with has duplicate student numbers from the list only choose the first one
-        // create a new list to store the unique students
-        List<Student> uniqueStudents = new ArrayList<>();
         // two for loops to compare each student with the rest of the students in the list to check for duplicates choose the first one and remove the rest of the duplicates
         // print the duplicate with toString method
         for (int i = 0; i < students.size(); i++) {
