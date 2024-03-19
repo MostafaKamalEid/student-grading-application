@@ -69,6 +69,11 @@ public class Main {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] studentData = line.split(",");
+            // check if the line is empty
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+            
             // check if the line has the correct number of fields
             if (studentData.length != 6) {
                 System.out.println("Invalid student data: " + line);
