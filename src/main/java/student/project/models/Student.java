@@ -39,6 +39,8 @@ public class Student {
         setOralMarks(oralMarks);
         setMidMarks(midMarks);
         setFinalMarks(finalMarks);
+
+
     }
 
     public String getName() {
@@ -109,8 +111,10 @@ public class Student {
         if (!StudentValidator.validateFinalMarks(finalMarks)) {
             throw new IllegalArgumentException("Invalid final marks");
         }
-
         this.finalMarks = finalMarks;
+        if (!StudentValidator.validateFullMarks(activityMarks, oralMarks, midMarks, finalMarks)) {
+            throw new IllegalArgumentException("Invalid full marks");
+        }
     }
     public  String CalculateGrading(){
         for (GradeRange gradeRange : GRADE_RANGES) {
