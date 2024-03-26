@@ -17,7 +17,7 @@ public class StudentValidator {
         if (number == null || number.isEmpty() || number.isBlank()) {
             return false;
         }
-        return number.matches("[0-9]{7}[A-Za-z]");
+        return number.matches("[0-9]{7}[A-Za-z0-9]");
     }
     //Student Activities mark: It is an integer of a value from 0 up to 10 of the full mark
     //of the activities.
