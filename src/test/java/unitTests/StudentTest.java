@@ -8,6 +8,7 @@ import student.project.validations.StudentValidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+// import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.mockStatic;
 
 public class StudentTest {
