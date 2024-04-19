@@ -1,20 +1,12 @@
 package unitTests;
-
-//import org.junit.Test;
-//import org.mockito.MockedStatic;
-
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import student.project.models.Subject;
+import student.project.validations.SubjectValidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-//import student.project.validations.SubjectValidator;
-//
-//import org.mockito.Mockito;
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertThrows;
-//import static org.mockito.Mockito.*;
-
 
 public  class SubjectTest {
 
@@ -30,90 +22,129 @@ public  class SubjectTest {
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
 
-//        SubjectValidator subjectValidatorMock = Mockito.mock(SubjectValidator.class);
-//        Mockito.when(subjectValidatorMock.validateName("3 Machine learning")).thenReturn(false);
-//
-//
-//        try (MockedStatic<SubjectValidator> utilities = (MockedStatic<SubjectValidator>) Mockito.mock(SubjectValidator.class) {
-//            utilities.when(SubjectValidator::name).thenReturn("Eugen");
-//            assertThat(SubjectValidator.name()).isEqualTo("Eugen");
-//        }
-//
-//
-//        try (MockedStatic mocked =Mockito.mockStatic(Foo.class)) {
-//            mocked.when(Foo::method).thenReturn("bar");
-//            assertEquals("bar", Foo.method());
-//            mocked.verify(Foo::method);
-//        }
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="3 Machine learning";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
 
-
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("3 Machine learning"));
-        assertEquals("Invalid name", exception.getMessage());
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameEndsWithNumber_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("Machine learning3"));
-        assertEquals("Invalid name", exception.getMessage());
+
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="Machine learning 3";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameContainsNumber_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("Machine 3 learning"));
-        assertEquals("Invalid name", exception.getMessage());
+
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="Machine 3 learning";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameAllNumbers_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("20 4 2001"));
-        assertEquals("Invalid name", exception.getMessage());
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="20 4 2001";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameStartsWithNumberAndNoSpaces_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("3Machine"));
-        assertEquals("Invalid name", exception.getMessage());
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="3Machine";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameEndsWithNumberAndNoSpaces_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("Machine3"));
-        assertEquals("Invalid name", exception.getMessage());
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="Machine3";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameContainsWithNumberAndNoSpaces_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("Ma3chine"));
-        assertEquals("Invalid name", exception.getMessage());
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="Mach3ine";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void test_setName_Subject_WithInvalidNameStartingWithSpace_ItShouldThrowIllegalArgumentException()
+    {
+        // Act - calling setName with invalid input should throw IllegalArgumentException
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input=" Software Testing";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameAllNumbersAndNoSpaces_ItShouldThrowIllegalArgumentException()
     {
         // Act - calling setName with invalid input should throw IllegalArgumentException
-        Subject subject= new Subject();
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                subject.setName("2042001"));
-        assertEquals("Invalid name", exception.getMessage());
+        try (MockedStatic<SubjectValidator> subjectValidatorMock = Mockito.mockStatic(SubjectValidator.class)) {
+            String input="2042001";
+            subjectValidatorMock.when(() -> SubjectValidator.validateName(input)).thenReturn(false);
+            Subject subject= new Subject();
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                    subject.setName(input));
+            assertEquals("Invalid name", exception.getMessage());
+
+        }
     }
     @Test
     public void test_setName_Subject_WithInvalidNameContainsSpecialCharacter_ItShouldThrowIllegalArgumentException()
