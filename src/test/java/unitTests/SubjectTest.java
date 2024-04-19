@@ -1,15 +1,19 @@
 package unitTests;
 
-import org.junit.Test;
-import org.mockito.MockedStatic;
+//import org.junit.Test;
+//import org.mockito.MockedStatic;
 
+import org.junit.jupiter.api.Test;
 import student.project.models.Subject;
-import student.project.validations.SubjectValidator;
 
-import org.mockito.Mockito;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+//import student.project.validations.SubjectValidator;
+//
+//import org.mockito.Mockito;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertThrows;
+//import static org.mockito.Mockito.*;
 
 
 public  class SubjectTest {
@@ -19,7 +23,7 @@ public  class SubjectTest {
         Subject subject= new Subject("Software Testing","CSE337s",100);
         String expected= "Software Testing";
         String actual= subject.getName();
-        assertEquals("Testing getName function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setName_Subject_WithInvalidNameStartsWithNumber_ItShouldThrowIllegalArgumentException()
@@ -126,7 +130,7 @@ public  class SubjectTest {
         String expected= "Software Testing";
         subject.setName("Software Testing");
         String actual= subject.getName();
-        assertEquals("Testing SetName function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setName_Subject_WithValidInputDoesntContainSpaces_ItShouldSetNameOfCourse(){
@@ -134,7 +138,7 @@ public  class SubjectTest {
         String expected= "ML";
         subject.setName("ML");
         String actual= subject.getName();
-        assertEquals("Testing SetName function",expected,actual );
+        assertEquals(expected,actual );
     }
 
     @Test
@@ -142,7 +146,7 @@ public  class SubjectTest {
         Subject subject= new Subject("Software Testing","CSE337s",100);
         String expected= "CSE337s";
         String actual= subject.getCode();
-        assertEquals("Testing getCode function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setCode_Subject_WithValidInputOf6AlphanumericCharacters_ItShouldSetCodeOfCourse(){
@@ -150,7 +154,7 @@ public  class SubjectTest {
         String expected= "CSE337";
         subject.setCode("CSE337");
         String actual= subject.getCode();
-        assertEquals("Testing setCode function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setCode_Subject_WithValidInputOf7AlphanumericCharacters_ItShouldSetCodeOfCourse(){
@@ -158,7 +162,7 @@ public  class SubjectTest {
         String expected= "CSE337s";
         subject.setCode("CSE337s");
         String actual= subject.getCode();
-        assertEquals("Testing setCode function",expected,actual );
+        assertEquals(expected,actual );
     }
 
     @Test
@@ -200,7 +204,7 @@ public  class SubjectTest {
         Subject subject= new Subject("Software Testing","CSE337s",100);
         int expected= 100;
         int actual= subject.getFullMark();
-        assertEquals("Testing getFullMark function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setFullMark_Subject_WithValidInputOfValue100_ItShouldSetFullMarkOfCourse(){
@@ -208,7 +212,7 @@ public  class SubjectTest {
         subject.setFullMark(100);
         int actual = subject.getFullMark();
         int expected= 100;
-        assertEquals("Testing getFullMark function",expected,actual );
+        assertEquals(expected,actual );
     }
     @Test
     public void test_setFullMark_Subject_WithInvalidInputOfValueMoreThan100_ItShouldThrowIllegalArgumentException(){
@@ -229,7 +233,7 @@ public  class SubjectTest {
         assertEquals("Invalid full mark", exception.getMessage());
     }
         @Test
-    public void TestToString_ItShouldReturnRequiredStringOfCourse(){
+    public void test_toString_Subject_ItShouldReturnRequiredStringOfCourse(){
         Subject subject= new Subject("Testing","CSE441s",100);
         String actual = subject.toString();
         String expected=  "Subject{" +
@@ -237,7 +241,7 @@ public  class SubjectTest {
                 ", code='" + "CSE441s" + '\'' +
                 ", fullMark=" + 100 +
                 '}' ;
-        assertEquals("Testing getFullMark function",expected,actual );
+        assertEquals(expected,actual );
     }
 }
 
