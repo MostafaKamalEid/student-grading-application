@@ -12,7 +12,8 @@ public class Student {
     private int oralMarks;
     private int midMarks;
     private int finalMarks;
-    // using the following weights for the marks of the student (activity, oral, mid, final)
+    // using the following weights for the marks of the student (activity, oral,
+    // mid, final)
     private static final List<GradeRange> GRADE_RANGES = Arrays.asList(
             new GradeRange(97, 100, 4, "A+"),
             new GradeRange(93, 96, 4, "A"),
@@ -25,8 +26,7 @@ public class Student {
             new GradeRange(67, 69, 1.7, "C-"),
             new GradeRange(64, 66, 1.3, "D+"),
             new GradeRange(60, 63, 1, "D"),
-            new GradeRange(0, 59, 0, "F")
-    );
+            new GradeRange(0, 59, 0, "F"));
 
     public Student() {
     }
@@ -39,7 +39,6 @@ public class Student {
         setOralMarks(oralMarks);
         setMidMarks(midMarks);
         setFinalMarks(finalMarks);
-
 
     }
 
@@ -116,7 +115,8 @@ public class Student {
             throw new IllegalArgumentException("Invalid full marks");
         }
     }
-    public  String CalculateGrading(){
+
+    public String CalculateGrading() {
         for (GradeRange gradeRange : GRADE_RANGES) {
             int fullMarks = activityMarks + oralMarks + midMarks + finalMarks;
 
@@ -124,10 +124,12 @@ public class Student {
                 return gradeRange.grade();
             }
         }
-        return "Invalid mark";
+        throw new IllegalArgumentException("Invalid mark");
     }
-    public double CalculateGPA(){
-        // use the full marks of the student (activity, oral, mid, final) to calculate the GPA
+
+    public double CalculateGPA() {
+        // use the full marks of the student (activity, oral, mid, final) to calculate
+        // the GPA
         int fullMarks = activityMarks + oralMarks + midMarks + finalMarks;
         // get representation of the full marks in terms of GPA
         for (GradeRange gradeRange : GRADE_RANGES) {
@@ -137,8 +139,6 @@ public class Student {
         }
         return 0;
     }
-
-
 
     @Override
     public String toString() {
