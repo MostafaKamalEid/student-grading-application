@@ -3,23 +3,24 @@ package unitTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.nio.file.Path;
 import org.junit.jupiter.api.io.TempDir;
-import java.nio.file.Files;
-import student.project.models.StudentGradingFile;
-import student.project.services.StudentGradesService.StudentGradesFileWriter;
+import org.mockito.Mock;
 import student.project.models.Student;
+import student.project.models.StudentGradingFile;
 import student.project.models.Subject;
+import student.project.services.StudentGradesService.StudentGradesFileWriter;
+
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.List;
-import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class StudentGradesFileWriterTest {
     @TempDir
@@ -32,9 +33,7 @@ public class StudentGradesFileWriterTest {
     StudentGradingFile studentGradingMock;
 
     Subject subjectMock;
-    Student student1Mock;
-    Student student2Mock;
-    Student student3Mock;
+
     @BeforeEach
     public void init() {
         // Create a mock StudentGradingFile with subject and students
@@ -114,12 +113,12 @@ public class StudentGradesFileWriterTest {
     }
 
     @Test
-    public void testWriteSubjectWithNullSubject() throws IOException {
+    public void testWriteSubjectWithNullSubject() {
         assertDoesNotThrow(() -> StudentGradesFileWriter.writeSubject(writerMock, null));
     }
 
     @Test
-    public void testWriteSubjectWithNonNullSubject() throws IOException {
+    public void testWriteSubjectWithNonNullSubject()  {
         // Initialize the mock objects
         subjectMock = mock(Subject.class);
         when(subjectMock.getFullMark()).thenReturn(100);
@@ -130,18 +129,18 @@ public class StudentGradesFileWriterTest {
     }
 
     @Test
-    public void testWriteStudentsWithNullStudents() throws IOException {
+    public void testWriteStudentsWithNullStudents()  {
         assertDoesNotThrow(() -> StudentGradesFileWriter.writeStudents(writerMock, null));
     }
 
     @Test
-    public void testWriteStudentsWithEmptyStudentsList() throws IOException {
+    public void testWriteStudentsWithEmptyStudentsList()  {
         List<Student> studentsList = new ArrayList<>();
         assertDoesNotThrow(() -> StudentGradesFileWriter.writeStudents(writerMock, studentsList));
     }
 
     @Test
-    public void testWriteStudentsWithNonEmptyStudentsList() throws IOException {
+    public void testWriteStudentsWithNonEmptyStudentsList()  {
         // Initialize the mock objects
         Student studentMock = mock(Student.class);
         when(studentMock.getName()).thenReturn("John");
