@@ -80,54 +80,6 @@ public class StudentGradesFileWriterTest {
         when(studentGradingMock.students()).thenReturn(studentList);
     }
 
-//    @Test
-//    public void testWriteDataSuccess() throws IOException {
-//        // Create a temporary input file
-//        Path filePath = tempDir.resolve("inputFile.txt");
-//        try (BufferedWriter inputWriter = Files.newBufferedWriter(filePath)) {
-//            inputWriter.write("Subject\nStudent1\nStudent2\nStudent3");
-//        }
-//
-//        List<Student> studentsList = new ArrayList<>();
-//        studentsList.add(student1Mock);
-//        studentsList.add(student2Mock);
-//        studentsList.add(student3Mock);
-//
-//        // Test writing data to the output file
-//        String inputFilePath = filePath.toString();
-//        StudentGradesFileWriter.writeData(inputFilePath, studentGradingFileMock);
-//
-//        // Check if the output file is created and contains the expected data
-//        String outputFilePath = filePath.toString().replace(".txt", "_output.txt");
-//        Path outputPath = Paths.get(outputFilePath);
-//        File outputFile = new File(outputFilePath);
-//        assertTrue(outputFile.exists());
-//        BufferedReader reader = Files.newBufferedReader(outputPath);
-//        assertEquals("Subject Name: Math", reader.readLine()); // Check subject
-//        assertEquals("Student1", reader.readLine()); // Check student 1
-//        assertEquals("Student2", reader.readLine()); // Check student 2
-//        assertEquals("Student3", reader.readLine()); // Check student 3
-//        assertNull(reader.readLine()); // Check end of file
-//        reader.close();
-//
-//        // Clean up: Delete the output file after the test
-//    }
-//
-//    @Test
-//    public void testWriteDataNoSubject() throws IOException {
-//        // Create a temporary input file with no subject
-//        String originalFilePath = "inputFile.txt";
-//        Path filePath = tempDir.resolve(originalFilePath);
-//        BufferedWriter inputWriter = Files.newBufferedWriter(filePath);
-//        inputWriter.write("Student1\nStudent2\nStudent3");
-//        inputWriter.close();
-//
-//        String inputFilePath = filePath.toString();
-//        // Test writing data to the output file
-//        assertThrows(NullPointerException.class,
-//                () -> StudentGradesFileWriter.writeData(inputFilePath, studentGradingFileMock));
-//    }
-
     @Test
     public void testWriteDataWithNullFilePath() {
         // Assert that an IllegalArgumentException is thrown for null file path
@@ -135,17 +87,24 @@ public class StudentGradesFileWriterTest {
                 () -> StudentGradesFileWriter.writeData(null, studentGradingFileMock));
     }
 
-//    @Test
-//    public void testWriteDataWithEmptyFile() throws IOException {
-//        // Create a temporary empty file
-//        Path tempFile = tempDir.resolve("tempFile.txt");
-//
-//        // Test writing data to the output file
-//        assertDoesNotThrow(() -> StudentGradesFileWriter.writeData(tempFile.toString(), studentGradingMock));
-//        // clean up the file
-//        Files.delete(tempFile);
-//
-//    }
+    @Test
+    public void testWriteDataWithEmptyFile() throws IOException {
+        // Create a temporary empty file
+        Path tempFile = tempDir.resolve("tempFile.txt");
+        Files.createFile(tempFile);
+
+        // Initialize the mock objects
+        StudentGradingFile studentGradingMock = mock(StudentGradingFile.class);
+        when(studentGradingMock.subject()).thenReturn(null);
+        when(studentGradingMock.students()).thenReturn(new ArrayList<>());
+
+        // Test writing data to the output file
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeData(tempFile.toString(), studentGradingMock));
+
+        // clean up the file
+        Files.delete(tempFile);
+
+    }
 
     @Test
     public void testWriteDataWithIOException() {
