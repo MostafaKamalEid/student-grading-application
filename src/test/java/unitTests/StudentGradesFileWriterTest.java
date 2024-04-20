@@ -20,14 +20,16 @@ import java.util.List;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
-
 public class StudentGradesFileWriterTest {
     @TempDir
     Path tempDir;
     @Mock
     StudentGradingFile studentGradingFileMock;
+    @Mock
+    BufferedWriter writerMock;
+    @Mock
     StudentGradingFile studentGradingMock;
+    
     Subject subjectMock;
     Student student1Mock;
     Student student2Mock;
@@ -101,7 +103,7 @@ public class StudentGradesFileWriterTest {
         File outputFile = new File(outputFilePath);
         assertTrue(outputFile.exists());
         BufferedReader reader = Files.newBufferedReader(outputPath);
-        assertEquals("Math", reader.readLine()); // Check subject
+        assertEquals("Subject Name: Math", reader.readLine()); // Check subject
         assertEquals("Student1", reader.readLine()); // Check student 1
         assertEquals("Student2", reader.readLine()); // Check student 2
         assertEquals("Student3", reader.readLine()); // Check student 3
@@ -142,6 +144,41 @@ public class StudentGradesFileWriterTest {
     public void testWriteDataWithIOException() {
         // Assert that an IllegalArgumentException is thrown for IO exception
         assertThrows(IllegalArgumentException.class, () -> StudentGradesFileWriter.writeData("invalidFilePath.txt", studentGradingMock));
+    }
+     @Test
+    public void testWriteSubjectWithNullSubject() throws IOException {
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeSubject(writerMock, null));
+    }
+
+    @Test
+    public void testWriteSubjectWithNonNullSubject() throws IOException {
+        when(subjectMock.getFullMark()).thenReturn(100);
+
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeSubject(writerMock, subjectMock));
+    }
+
+    @Test
+    public void testWriteStudentsWithNullStudents() throws IOException {
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeStudents(writerMock, null));
+    }
+
+    @Test
+    public void testWriteStudentsWithEmptyStudentsList() throws IOException {
+        List<Student> studentsList = new ArrayList<>();
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeStudents(writerMock, studentsList));
+    }
+
+    @Test
+    public void testWriteStudentsWithNonEmptyStudentsList() throws IOException {
+        List<Student> studentsList = new ArrayList<>();
+        Student studentMock = mock(Student.class);
+        when(studentMock.getName()).thenReturn("John");
+        when(studentMock.getNumber()).thenReturn("123456");
+        when(studentMock.CalculateGPA()).thenReturn(3.5);
+        when(studentMock.CalculateGrading()).thenReturn("A");
+        studentsList.add(studentMock);
+
+        assertDoesNotThrow(() -> StudentGradesFileWriter.writeStudents(writerMock, studentsList));
     }
 }
 
