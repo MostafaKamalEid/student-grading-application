@@ -37,7 +37,6 @@ public class StudentGradesFileReaderTest {
             filesMock.when(() -> Files.exists(Paths.get("realfile.txt"))).thenReturn(true);
 
             // Mock FileReader and BufferedReader to simulate IOException
-            FileReader mockFileReader = mock(FileReader.class);
             BufferedReader mockBufferedReader = mock(BufferedReader.class);
             when(mockBufferedReader.readLine()).thenThrow(new IOException("Simulated read error"));
             Exception exception = assertThrows(IllegalArgumentException.class,
@@ -46,14 +45,13 @@ public class StudentGradesFileReaderTest {
         }
     }
     @Test
-    public void test_readData_WithValidFile_ShouldReturnCorrectGradingFile() throws Exception {
+    public void test_readData_WithValidFile_ShouldReturnCorrectGradingFile()  {
 
         // Assume StudentGradesFileReader has a method to set the BufferedReader for
         // testing
-        StudentGradesFileReader readerInstance = new StudentGradesFileReader();
 
         // Call the actual method
-        StudentGradingFile result = readerInstance.readData("record.txt");
+        StudentGradingFile result = StudentGradesFileReader.readData("record.txt");
 
         // Asserts
         assertNotNull(result);
@@ -65,7 +63,6 @@ public class StudentGradesFileReaderTest {
     public void test_readData_WithOnlySubjectLine_ShouldReturnSubjectDataWithEmptyStudentData() throws Exception {
         // Create a temporary file
         File tempFile = File.createTempFile("testFileWithOnlySubjectLine", ".txt");
-        tempFile.getPath();
         // Request file deletion when the JVM exits, added as a precaution
         tempFile.deleteOnExit();
         // Write to the file
@@ -87,7 +84,6 @@ public class StudentGradesFileReaderTest {
     public void test_readData_WithOnlyStudentLine_ShouldThrowIllegalArgumentException() throws Exception {
         // Create a temporary file
         File tempFile = File.createTempFile("testFileWithOnlySubjectLine", ".txt");
-        tempFile.getPath();
         // Request file deletion when the JVM exits, added as a precaution
         tempFile.deleteOnExit();
         // Write to the file
@@ -113,7 +109,6 @@ public class StudentGradesFileReaderTest {
     public void test_readSubject_WithLessNumberOfFields_ShouldThrowIllegalArgumentException() {
 
         String subjectLine = "Mathematics, MAT101"; //
-        BufferedReader reader = new BufferedReader(new StringReader(subjectLine));
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> StudentGradesFileReader.readSubject(subjectLine));
         assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
@@ -123,7 +118,6 @@ public class StudentGradesFileReaderTest {
     public void test_readSubject_WithMoreNumberOfFields_ShouldThrowIllegalArgumentException() {
 
         String subjectLine = "Mathematics, MATH101,100,101"; //
-        BufferedReader reader = new BufferedReader(new StringReader(subjectLine));
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> StudentGradesFileReader.readSubject(subjectLine));
         assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
@@ -131,7 +125,6 @@ public class StudentGradesFileReaderTest {
     @Test
     public void test_readSubject_WithInvalidFullMarkType_ShouldThrowIllegalArgumentException() {
         String subjectLine = "Mathematics, MAT101, one hundred";
-        BufferedReader reader = new BufferedReader(new StringReader(subjectLine));
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> StudentGradesFileReader.readSubject(subjectLine));
         assertTrue(exception.getMessage().contains("The full mark should be an integer"));
@@ -141,7 +134,6 @@ public class StudentGradesFileReaderTest {
     @Test
     public void test_readSubject_WithvalidNumberOfFieldsWithIncorrectDataTypes_ShouldThrowIllegalArgumentException() {
         String subjectLine = "Mathematics, MATH101, 100";
-        BufferedReader reader = new BufferedReader(new StringReader(subjectLine));
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> StudentGradesFileReader.readSubject(subjectLine));
         assertTrue(exception.getMessage().contains("Invalid subject data:"));
@@ -153,9 +145,9 @@ public class StudentGradesFileReaderTest {
         BufferedReader reader = new BufferedReader(new StringReader(studentData));
         List<Student> students = StudentGradesFileReader.readStudents(reader);
         assertEquals(2, students.size());
-        assertEquals("John Doe", students.get(0).getName());
-        assertEquals("12345678", students.get(0).getNumber());
-        assertEquals(8, students.get(0).getActivityMarks());
+        assertEquals("John Doe", students.getFirst().getName());
+        assertEquals("12345678", students.getFirst().getNumber());
+        assertEquals(8, students.getFirst().getActivityMarks());
     }
 
     @Test
@@ -177,7 +169,7 @@ public class StudentGradesFileReaderTest {
 
     @Test
     public void test_readStudents_WithvalidNumberOfFieldsWithIncorrectDataTypes_ShouldThrowIllegalArgumentException()
-            throws IOException {
+             {
         String studentData = "John Doe,A14678,8,9,18,50";
         BufferedReader reader = new BufferedReader(new StringReader(studentData));
         Exception exception = assertThrows(IllegalArgumentException.class,
@@ -202,9 +194,9 @@ public class StudentGradesFileReaderTest {
 
         List<Student> students = StudentGradesFileReader.readStudents(reader);
         assertEquals(1, students.size());
-        assertEquals("John Doe", students.get(0).getName());
-        assertEquals("12345678", students.get(0).getNumber());
-        assertEquals(8, students.get(0).getActivityMarks());
+        assertEquals("John Doe", students.getFirst().getName());
+        assertEquals("12345678", students.getFirst().getNumber());
+        assertEquals(8, students.getFirst().getActivityMarks());
     }
 
     @Test
