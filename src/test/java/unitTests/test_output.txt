@@ -1,0 +1,4 @@
+Subject Name: Mathematics
+Max Mark: 100
+name  number  GPA  Grade
+john Doe 0234567s 3.7 A-
