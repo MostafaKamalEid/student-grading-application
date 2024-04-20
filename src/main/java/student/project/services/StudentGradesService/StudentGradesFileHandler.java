@@ -9,7 +9,6 @@ public class StudentGradesFileHandler {
            throw new IllegalArgumentException("Please provide the file path as an argument.");
         }
 
-
         // read the file
         StudentGradingFile studentGradingFile = StudentGradesFileReader.readData(filePath);
         // write the file

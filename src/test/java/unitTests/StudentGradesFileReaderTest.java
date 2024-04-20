@@ -20,7 +20,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class StudentGradesFileReaderTest {
-
     @Test
     public void test_readData_WithFileDoesNotExist_ShouldThrowIllegalArgumentException() {
         try (MockedStatic<Files> filesMock = Mockito.mockStatic(Files.class)) {
@@ -28,10 +27,8 @@ public class StudentGradesFileReaderTest {
             Exception exception = assertThrows(IllegalArgumentException.class,
                     () -> StudentGradesFileReader.readData("nonexistent.txt"));
             assertTrue(exception.getMessage().contains("File does not exist"));
-
         }
     }
-
     @Test
     public void test_readData_FileWithReadingError_ShouldThrowIllegalArgumentException() throws IOException {
         // Mock the existence check to always return true, simulating that the file
@@ -48,7 +45,6 @@ public class StudentGradesFileReaderTest {
             assertTrue(exception.getMessage().contains("Error reading file:"));
         }
     }
-
     @Test
     public void test_readData_WithValidFile_ShouldReturnCorrectGradingFile() throws Exception {
 
@@ -65,7 +61,6 @@ public class StudentGradesFileReaderTest {
         assertEquals("English", result.subject().getName());
         assertEquals(7, result.students().size());
     }
-
     @Test
     public void test_readData_WithOnlySubjectLine_ShouldReturnSubjectDataWithEmptyStudentData() throws Exception {
         // Create a temporary file
@@ -86,7 +81,6 @@ public class StudentGradesFileReaderTest {
         assertNotNull(result);
         assertTrue(result.students().isEmpty());
         assertEquals("Mathematics", result.subject().getName());
-
     }
 
     @Test
@@ -106,7 +100,6 @@ public class StudentGradesFileReaderTest {
         assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
 
     }
-
     @Test
     public void test_readSubject_WithValidInput_ShouldReturnValidSubjectData() {
         String subjectLine = "Mathematics, MAT101, 100";
@@ -135,7 +128,6 @@ public class StudentGradesFileReaderTest {
                 () -> StudentGradesFileReader.readSubject(subjectLine));
         assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
     }
-
     @Test
     public void test_readSubject_WithInvalidFullMarkType_ShouldThrowIllegalArgumentException() {
         String subjectLine = "Mathematics, MAT101, one hundred";
@@ -174,7 +166,6 @@ public class StudentGradesFileReaderTest {
                 () -> StudentGradesFileReader.readStudents(reader));
         assertTrue(exception.getMessage().contains("should be integers"));
     }
-
     @Test
     public void test_readStudents_WithInvalidNumberOfFields_ShouldThrowIllegalArgumentException() {
         String studentData = "John Doe, 001, 25,25, 25"; // Non-integer mark
