@@ -216,13 +216,13 @@ public void test_readStudents_WithExcessiveSpaces_ShouldReturnCorrectTrimmedStud
 }
 @Test
 public void test_readStudents_WithEmptyLines_ShouldReturnStudentDataWithSpaceRemoved() throws IOException {
-    String studentData = "\n\nJohn Doe,12345678,8,9,18,50\n\nBob Johnson,34567890,9,10,20,55\n";
+    String studentData = "\n\nJohn Doe,12345678,8,9,18,50\n\nBob Johnsos,34567890,9,10,20,55\n";
     BufferedReader reader = new BufferedReader(new StringReader(studentData));
 
     List<Student> students = StudentGradesFileReader.readStudents(reader);
     assertEquals(2, students.size());
     assertEquals("John Doe", students.get(0).getName());
-    assertEquals("Bob Johnson", students.get(1).getName());
+    assertEquals("Bob Johnsos", students.get(1).getName());
 }
 
 
