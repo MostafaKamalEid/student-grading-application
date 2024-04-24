@@ -10,7 +10,7 @@ public class StudentValidatorTest {
 
     @Test
     public void test_validateName_WithValidInputOfSingleWord_ShouldReturnTrue() {
-        assertTrue(StudentValidator.validateName("John@"));
+        assertTrue(StudentValidator.validateName("John"));
     }
 
     @Test
