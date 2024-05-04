@@ -34,11 +34,11 @@ public class StudentGradesFileWriterTest {
         System.setOut(new PrintStream(outContent));
 
         // Create a mock writeSubject static method to test IOException
-
         try (MockedStatic<StudentGradesFileWriter> mockedStudentGradesFileWriter= mockStatic(StudentGradesFileWriter.class)) {
             mockedStudentGradesFileWriter.when(() -> StudentGradesFileWriter.writeSubject(Mockito.any(BufferedWriter.class), Mockito.any(Subject.class))).thenThrow(new IOException());
             mockedStudentGradesFileWriter.when(() -> StudentGradesFileWriter.writeStudents(Mockito.any(BufferedWriter.class), Mockito.anyList())).thenThrow(new IOException());
             mockedStudentGradesFileWriter.when(() -> StudentGradesFileWriter.writeData(Mockito.anyString(), Mockito.any(StudentGradingFile.class))).thenCallRealMethod();
+
             // Create a StudentGradingFile
             Path tempFile = Files.createTempFile("temp", ".txt");
 
@@ -46,18 +46,15 @@ public class StudentGradesFileWriterTest {
             Student student = new Student("John Doe", "1234567A", 10, 10, 20, 57);
             StudentGradingFile studentGradingFile = new StudentGradingFile(subject, Collections.singletonList(student));
             StudentGradesFileWriter.writeData(tempFile.toString(), studentGradingFile);
+
             // Check that the error message was printed
             // get file name without extension
             String fileNameWithoutExtension = tempFile.getFileName().toString().replaceFirst("[.][^.]+$", "");
-            String pathOfFileAfterAddOutput = fileNameWithoutExtension + "_output.txt";
+            String pathOfFileAfterAddOutput = tempFile.getParent() + File.separator + fileNameWithoutExtension + "_output.txt";
 
-
-            String expectedOutput = "Error writing file: "+ tempFile.getParent() + "\\" + pathOfFileAfterAddOutput + "\r\n";
+            String expectedOutput = "Error writing file: "+ pathOfFileAfterAddOutput + System.lineSeparator();
             assertEquals(expectedOutput, outContent.toString());
-
-
         }
-
     }
     @Test
     public void testWriteSubject_NoExceptionThrown() throws IOException {
