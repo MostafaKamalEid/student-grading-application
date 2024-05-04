@@ -96,7 +96,7 @@ public class StudentGradesFileWriterTest {
         // Read the content of the file
         String content = Files.readString(tempFile);
         // Check the content of the file
-        assertEquals("name  number  GPA  Grade\r\nJohn Doe 1234567A 4.0 A+\r\n", content);
+        assertEquals("name  number  GPA  Grade"+ System.lineSeparator() +"John Doe 1234567A 4.0 A+"+ System.lineSeparator(), content);
     }
 
     @Test
