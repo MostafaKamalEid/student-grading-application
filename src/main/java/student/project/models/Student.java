@@ -137,7 +137,7 @@ public class Student {
                 return gradeRange.gpa();
             }
         }
-        return 0;
+        throw new IllegalArgumentException("Invalid mark");
     }
 
     @Override

@@ -145,9 +145,9 @@ public class StudentGradesFileReaderTest {
         BufferedReader reader = new BufferedReader(new StringReader(studentData));
         List<Student> students = StudentGradesFileReader.readStudents(reader);
         assertEquals(2, students.size());
-        assertEquals("John Doe", students.getFirst().getName());
-        assertEquals("12345678", students.getFirst().getNumber());
-        assertEquals(8, students.getFirst().getActivityMarks());
+        assertEquals("John Doe", students.get(0).getName());
+        assertEquals("12345678", students.get(0).getNumber());
+        assertEquals(8, students.get(0).getActivityMarks());
     }
 
     @Test
@@ -194,9 +194,9 @@ public class StudentGradesFileReaderTest {
 
         List<Student> students = StudentGradesFileReader.readStudents(reader);
         assertEquals(1, students.size());
-        assertEquals("John Doe", students.getFirst().getName());
-        assertEquals("12345678", students.getFirst().getNumber());
-        assertEquals(8, students.getFirst().getActivityMarks());
+        assertEquals("John Doe", students.get(0).getName());
+        assertEquals("12345678", students.get(0).getNumber());
+        assertEquals(8, students.get(0).getActivityMarks());
     }
 
     @Test
