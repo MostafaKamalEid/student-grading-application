@@ -58,9 +58,7 @@ public class StudentGradesFileWriterTest {
     }
     @Test
     public void testWriteSubject_NoExceptionThrown() throws IOException {
-
-
-       // Create Writer
+        // Create Writer
         Path tempFile = Files.createTempFile("temp", ".txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile.toString()));
 
@@ -76,8 +74,8 @@ public class StudentGradesFileWriterTest {
         // Read the content of the file
         String content = Files.readString(tempFile);
         // Check the content of the file
-        assertEquals("Subject Name: Software Testing\r\nMax Mark: 100\r\n", content);
-
+        String expectedContent = "Subject Name: Software Testing" + System.lineSeparator() + "Max Mark: 100" + System.lineSeparator();
+        assertEquals(expectedContent, content);
     }
 
     @Test
