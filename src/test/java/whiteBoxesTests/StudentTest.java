@@ -218,4 +218,31 @@ public class StudentTest {
 
 
     }
+
+    @Test
+    public void testSetFinalMarks_InvalidFullMarks_ShouldThrowIllegalArgumentException() {
+        // use mocks to bypass the validation of the marks and test the setFinalMarks method with invalid marks
+        try (MockedStatic<StudentValidator> mockedValidator = mockStatic(StudentValidator.class)) {
+            mockedValidator.when(() -> StudentValidator.validateFinalMarks(Mockito.anyInt())).thenReturn(true);
+            // use real implementation of the validateFullMarks method
+            mockedValidator.when(() -> StudentValidator.validateFullMarks(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(),
+                    Mockito.anyInt())).thenCallRealMethod();
+            mockedValidator.when(() -> StudentValidator.validateActivityMarks(Mockito.anyInt())).thenReturn(true);
+            mockedValidator.when(() -> StudentValidator.validateOralMarks(Mockito.anyInt())).thenReturn(true);
+            mockedValidator.when(() -> StudentValidator.validateMidMarks(Mockito.anyInt())).thenReturn(true);
+            mockedValidator.when(() -> StudentValidator.validateName(Mockito.anyString())).thenReturn(true);
+            mockedValidator.when(() -> StudentValidator.validateNumber(Mockito.anyString())).thenReturn(true);
+
+            Student student = new Student();
+            student.setName("John Doe");
+            student.setNumber("1234567A");
+            student.setActivityMarks(10);
+            student.setOralMarks(10);
+            student.setMidMarks(20);
+
+            // setFinalMarks should throw an exception because the full marks are invalid
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> student.setFinalMarks(61));
+            assertEquals("Invalid full marks", exception.getMessage());
+        }
+    }
 }

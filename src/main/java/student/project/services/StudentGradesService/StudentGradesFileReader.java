@@ -36,6 +36,9 @@ public class StudentGradesFileReader {
         }
     }
     public static Subject readSubject(String subjectLine) {
+        if (subjectLine == null) {
+            throw new IllegalArgumentException("Invalid subject data: null\nReason: The line should contain exactly 3 fields separated by commas.");
+        }
         String[] subjectData = subjectLine.split(",");
         // check if the line has the correct number of fields
         if (subjectData.length != 3) {

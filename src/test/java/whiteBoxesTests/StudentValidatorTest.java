@@ -79,4 +79,6 @@ public class StudentValidatorTest {
     public void testValidateFullMarks_InvalidMarks_ShouldReturnFalse() {
         assertFalse(StudentValidator.validateFullMarks(50, 10, 30, 60));
     }
+
+
 }

@@ -43,100 +43,100 @@ public class Student {
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        // validate the name using StudentValidator
-        if (!StudentValidator.validateName(name)) {
-            throw new IllegalArgumentException("Invalid name");
-        }
-        this.name = name;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        // validate the number using StudentValidator
-        if (!StudentValidator.validateNumber(number)) {
-            throw new IllegalArgumentException("Invalid number");
+            return name;
         }
 
-        this.number = number;
-    }
-
-    public int getActivityMarks() {
-        return activityMarks;
-    }
-
-    public void setActivityMarks(int activityMarks) {
-
-        if (!StudentValidator.validateActivityMarks(activityMarks)) {
-            throw new IllegalArgumentException("Invalid activity marks");
-        }
-        this.activityMarks = activityMarks;
-    }
-
-    public int getOralMarks() {
-        return oralMarks;
-    }
-
-    public void setOralMarks(int oralMarks) {
-        if (!StudentValidator.validateOralMarks(oralMarks)) {
-            throw new IllegalArgumentException("Invalid oral marks");
+        public void setName(String name) {
+            // validate the name using StudentValidator
+            if (!StudentValidator.validateName(name)) {
+                throw new IllegalArgumentException("Invalid name");
+            }
+            this.name = name;
         }
 
-        this.oralMarks = oralMarks;
-    }
-
-    public int getMidMarks() {
-        return midMarks;
-    }
-
-    public void setMidMarks(int midMarks) {
-        if (!StudentValidator.validateMidMarks(midMarks)) {
-            throw new IllegalArgumentException("Invalid mid marks");
+        public String getNumber() {
+            return number;
         }
-        this.midMarks = midMarks;
-    }
 
-    public int getFinalMarks() {
-        return finalMarks;
-    }
+        public void setNumber(String number) {
+            // validate the number using StudentValidator
+            if (!StudentValidator.validateNumber(number)) {
+                throw new IllegalArgumentException("Invalid number");
+            }
 
-    public void setFinalMarks(int finalMarks) {
-        if (!StudentValidator.validateFinalMarks(finalMarks)) {
-            throw new IllegalArgumentException("Invalid final marks");
+            this.number = number;
         }
-        this.finalMarks = finalMarks;
-        if (!StudentValidator.validateFullMarks(activityMarks, oralMarks, midMarks, finalMarks)) {
-            throw new IllegalArgumentException("Invalid full marks");
-        }
-    }
 
-    public String CalculateGrading() {
-        for (GradeRange gradeRange : GRADE_RANGES) {
+        public int getActivityMarks() {
+            return activityMarks;
+        }
+
+        public void setActivityMarks(int activityMarks) {
+
+            if (!StudentValidator.validateActivityMarks(activityMarks)) {
+                throw new IllegalArgumentException("Invalid activity marks");
+            }
+            this.activityMarks = activityMarks;
+        }
+
+        public int getOralMarks() {
+            return oralMarks;
+        }
+
+        public void setOralMarks(int oralMarks) {
+            if (!StudentValidator.validateOralMarks(oralMarks)) {
+                throw new IllegalArgumentException("Invalid oral marks");
+            }
+
+            this.oralMarks = oralMarks;
+        }
+
+        public int getMidMarks() {
+            return midMarks;
+        }
+
+        public void setMidMarks(int midMarks) {
+            if (!StudentValidator.validateMidMarks(midMarks)) {
+                throw new IllegalArgumentException("Invalid mid marks");
+            }
+            this.midMarks = midMarks;
+        }
+
+        public int getFinalMarks() {
+            return finalMarks;
+        }
+
+        public void setFinalMarks(int finalMarks) {
+            if (!StudentValidator.validateFinalMarks(finalMarks)) {
+                throw new IllegalArgumentException("Invalid final marks");
+            }
+            this.finalMarks = finalMarks;
+            if (!StudentValidator.validateFullMarks(activityMarks, oralMarks, midMarks, finalMarks)) {
+                throw new IllegalArgumentException("Invalid full marks");
+            }
+        }
+
+        public String CalculateGrading() {
+            for (GradeRange gradeRange : GRADE_RANGES) {
+                int fullMarks = activityMarks + oralMarks + midMarks + finalMarks;
+
+                if (fullMarks >= gradeRange.lowerBound() && fullMarks <= gradeRange.upperBound()) {
+                    return gradeRange.grade();
+                }
+            }
+            throw new IllegalArgumentException("Invalid mark");
+        }
+
+        public double CalculateGPA() {
+            // use the full marks of the student (activity, oral, mid, final) to calculate
+            // the GPA
             int fullMarks = activityMarks + oralMarks + midMarks + finalMarks;
-
-            if (fullMarks >= gradeRange.lowerBound() && fullMarks <= gradeRange.upperBound()) {
-                return gradeRange.grade();
+            // get representation of the full marks in terms of GPA
+            for (GradeRange gradeRange : GRADE_RANGES) {
+                if (fullMarks >= gradeRange.lowerBound() && fullMarks <= gradeRange.upperBound()) {
+                    return gradeRange.gpa();
+                }
             }
-        }
-        throw new IllegalArgumentException("Invalid mark");
-    }
-
-    public double CalculateGPA() {
-        // use the full marks of the student (activity, oral, mid, final) to calculate
-        // the GPA
-        int fullMarks = activityMarks + oralMarks + midMarks + finalMarks;
-        // get representation of the full marks in terms of GPA
-        for (GradeRange gradeRange : GRADE_RANGES) {
-            if (fullMarks >= gradeRange.lowerBound() && fullMarks <= gradeRange.upperBound()) {
-                return gradeRange.gpa();
-            }
-        }
         throw new IllegalArgumentException("Invalid mark");
     }
 
