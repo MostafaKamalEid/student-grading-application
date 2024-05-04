@@ -21,6 +21,8 @@ jobs:
           distribution: 'microsoft'
           cache: maven
 
+      - name: compile project
+        run: mvn compile
 
       - name: Run tests
         run: mvn test
