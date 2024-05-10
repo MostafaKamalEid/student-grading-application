@@ -1,0 +1,4 @@
+Subject Name: Mathematics
+Max Mark: 100
+name  number  GPA  Grade
+John Doe 1234567s 3.3 B+
