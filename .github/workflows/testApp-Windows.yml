@@ -24,6 +24,10 @@ jobs:
       - name: compile project
         run: mvn compile
 
-      - name: Run tests
-        run: mvn test -Dsurefire.useFile=false
+      - name: Build and Run Tests
+        run: mvn test --batch-mode --fail-at-end
+
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
 
