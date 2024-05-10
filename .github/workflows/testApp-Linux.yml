@@ -36,3 +36,11 @@ jobs:
           path: target/surefire-reports
           report_always: true
           check_name : 'Test Report on Linux'
+
+      - name: Test Detailed Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: Test Detailed Report           # Name of the check run which will be created
+          path: target/surefire-reports
+          reporter: java-junit
