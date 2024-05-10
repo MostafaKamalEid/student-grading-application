@@ -20,7 +20,6 @@ public class StudentGradesFileReaderTest {
     @Test
     public void testReadData_FileDoesNotExist() {
         assertThrows(IllegalArgumentException.class, () -> StudentGradesFileReader.readData("nonexistentfile.txt"));
-        throw new IllegalArgumentException("Please provide the file path as an argument.");
     }
 
     @Test
