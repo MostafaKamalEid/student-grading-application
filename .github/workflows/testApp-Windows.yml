@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  Test-App-On-Windows:
 
     runs-on: windows-latest
 
