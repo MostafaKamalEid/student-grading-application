@@ -44,4 +44,3 @@ jobs:
           name: Test Detailed Report           # Name of the check run which will be created
           path: target/surefire-reports/TEST-*.xml
           reporter: java-junit
-          fail-on-error: false
