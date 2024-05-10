@@ -18,6 +18,7 @@ public class StudentGradesFileHandlerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             StudentGradesFileHandler.Handle(null);
         });
+        throw new IllegalArgumentException("File path cannot be null");
     }
 
     @Test
