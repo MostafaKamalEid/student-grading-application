@@ -40,6 +40,7 @@ public class StudentGradesFileHandlerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             StudentGradesFileHandler.Handle("non_existent_file.txt");
         });
+        throw new IllegalArgumentException("asdas");
     }
 
     @Test
