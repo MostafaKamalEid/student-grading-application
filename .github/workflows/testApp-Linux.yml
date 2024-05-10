@@ -1,4 +1,4 @@
-name: Test Student Grading App
+name: Test Student Grading App On Linux
 
 on:
   push:
