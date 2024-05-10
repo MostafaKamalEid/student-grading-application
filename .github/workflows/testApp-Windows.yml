@@ -33,7 +33,6 @@ jobs:
         uses: ScaCap/action-surefire-report@v1.8.0
         with:
             path: target/surefire-reports
-            github_token: ${{ secrets.STUDENT_TOKEN }}
 
 
 
