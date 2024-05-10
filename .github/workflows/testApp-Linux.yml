@@ -37,10 +37,24 @@ jobs:
           report_always: true
           check_name : 'Test Report on Linux'
 
+      - name: Path Filter
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            surefire-reports:
+              - 'target/surefire-reports/TEST-*.xml'
+          base: 'main'
+          ref: 'main'
+          initial-fetch-depth: '100'
+          list-files: 'shell'
+          working-directory: ''
+          predicate-quantifier: 'some'
+
       - name: Test Detailed Report
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: Test Detailed Report           # Name of the check run which will be created
-          path: target/surefire-reports
+          path: target/surefire-reports/TEST-*.xml
           reporter: java-junit
