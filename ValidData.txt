@@ -1,3 +1,0 @@
-Mathematics,MTH123,100
-John Doe,12345678,8,9,18,50
-Jane Smith,23456789,10,8,17,52

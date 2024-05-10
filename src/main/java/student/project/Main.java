@@ -12,8 +12,6 @@ public class Main {
             StudentGradesFileHandler.Handle(args[0]);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // exit with an error code
-            System.exit(1);
         }
     }
 

@@ -1,2 +1,0 @@
-Mathematics!,MTH12@,100
-John Doe,1234567s,8,9,18,50
