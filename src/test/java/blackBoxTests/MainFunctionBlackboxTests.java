@@ -705,5 +705,151 @@ class MainFunctionBlackboxTests {
             assertTrue(capturedOutput.contains(line));
         }
         }
+    @Test
+    void testMain_emptySubjectInfo_separatedByCommas() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/emptySubjectInfo_separatedByCommas.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid subject data: ,,");
+        expectedOutputList.add("Reason: The line should contain exactly 3 fields separated by commas.");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
+    @Test
+    void testMain_emptyLinesOnStudentRecords() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/emptyLinesOnStudentRecords.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Empty lines on student records");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
+    @Test
+    void testMain_multipleStudentRecordsOnTheSameLine() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/multipleStudentRecordsOnTheSameLine.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18,50 John Doe,1234567,8,9,18,50");
+        expectedOutputList.add("Reason: The line should contain exactly 6 fields separated by commas.");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
+    @Test
+    void testMain_spaceBeforeActivitiesMark() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/spaceBeforeActivitiesMark.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,1234567, 8,9,18,50");
+        expectedOutputList.add("Reason: Invalid number");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
+    @Test
+    void testMain_spaceAfterMidtermMark() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/spaceAfterMidtermMark.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18 ,50");
+        expectedOutputList.add("Reason: Invalid number");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
+
+
 
 }

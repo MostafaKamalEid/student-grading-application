@@ -1,0 +1,2 @@
+Mathematics,MTH123,100
+John Doe,1234567, 8,9,18,50
