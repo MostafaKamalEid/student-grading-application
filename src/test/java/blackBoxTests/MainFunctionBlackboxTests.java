@@ -230,4 +230,62 @@ class MainFunctionBlackboxTests {
             assertTrue(capturedOutput.contains(line));
         }
     }
+    @Test
+    void testMain_invalidSubjectCode_withSpecialChar() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withSpecialChar.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid subject data: Mathematics,MTH12@,100");
+        expectedOutputList.add("Reason: Invalid code");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
+    @Test
+    void testMain_invalidFullMark() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidFullMark.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid subject data: Mathematics,MTH123,60");
+        expectedOutputList.add("Reason: Invalid full mark");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
 }
