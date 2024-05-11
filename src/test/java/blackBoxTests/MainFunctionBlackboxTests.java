@@ -375,5 +375,219 @@ class MainFunctionBlackboxTests {
             assertTrue(capturedOutput.contains(line));
         }
     }
+    @Test
+    void testMain_invalidStudentNumber_wihMoreThan8Num() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_wihMoreThan8Num.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,123456789,8,9,18,50");
+        expectedOutputList.add("Reason: Invalid number");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
+    @Test
+    void testMain_invalidStudentNumber_withLessThan8Num() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_withLessThan8Num.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18,50");
+        expectedOutputList.add("Reason: Invalid number");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
+    @Test
+    void testMain_invalidStudentNumber_NoneAlphanumeric() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_NoneAlphanumeric.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        Path path1 = Paths.get("src/test/java/blackBoxTests/invalidStudentNumber_NoneAlphanumeric_expected.txt");
+        Path path2 = Paths.get("src/test/java/blackBoxTests/invalidStudentNumber_NoneAlphanumeric_output.txt");
+        long mismatch = Files.mismatch(path1, path2);
+        assertEquals(-1, mismatch);
+    }
+    @Test
+    void testMain_invalidStudentNumber_containingSpecialNonAlphanumericChar() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_containingSpecialNonAlphanumericChar.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,1234567@,8,9,18,50");
+        expectedOutputList.add("Reason: Invalid number");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }}
+    @Test
+    void testMain_invalidActivityMark_containsSpecialChar() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidActivityMark_containsSpecialChar.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,12345678,!,9,18,50");
+        expectedOutputList.add("Reason: The activity marks, oral marks, midterm marks and final marks should be integers.");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+      }
+    }
+    @Test
+    void testMain_invalidOralMark_containsAlphabeticChar() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidOralMark_containsAlphabeticChar.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,12345678,9,A,18,50");
+        expectedOutputList.add("Reason: The activity marks, oral marks, midterm marks and final marks should be integers.");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }}
+    @Test
+    void testMain_invalidPracticalMark_containsNegativeNum() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidPracticalMark_containsNegativeNum.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,12345678,9,-9,18,50");
+        expectedOutputList.add("Reason: Invalid oral marks");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
+    @Test
+    void testMain_invalidMidtermMark_containingHigherThanMax() throws IOException {
+        String filePath = "src/test/java/blackBoxTests/invalidMidtermMark_containingHigherThanMax.txt"; // Change this to the desired file path
+
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        expectedOutputList.add("Invalid student data: John Doe,12345678,9,9,21,50");
+        expectedOutputList.add("Reason: Invalid mid marks");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        //Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+        }
 
 }
