@@ -32,6 +32,7 @@ public class StudentGradesFileHandlerTest {
         assertDoesNotThrow(() -> {
             StudentGradesFileHandler.Handle(tempFile.toString());
         });
+        throw  new IOException();
     }
 
     @Test
