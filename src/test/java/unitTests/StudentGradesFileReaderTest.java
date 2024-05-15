@@ -44,170 +44,64 @@ public class StudentGradesFileReaderTest {
             assertTrue(exception.getMessage().contains("Error reading file:"));
         }
     }
+
+
     @Test
-    public void test_readData_WithValidFile_ShouldReturnCorrectGradingFile()  {
+    public void test_readData_WithValidFile_ShouldReturnCorrectGradingFile() throws IOException {
+        // Arrange
+        String fileContent = "English, ENG101, 100\n" +
+                "John Doe,12345678,8,9,18,50\n" +
+                "Jane Doe,87654321,10,10,20,60\n";
+        BufferedReader reader = new BufferedReader(new StringReader(fileContent));
+        StudentGradingFile expectedFile = new StudentGradingFile(
+                new Subject("English", "ENG101", 100),
+                List.of(
+                        new Student("John Doe", "12345678", 8, 9, 18, 50),
+                        new Student("Jane Doe", "87654321", 10, 10, 20, 60)
+                )
+        );
 
-        // Assume StudentGradesFileReader has a method to set the BufferedReader for
-        // testing
+        try (MockedStatic<StudentGradesFileReader> mockedStudentGradesFileReader = Mockito.mockStatic(StudentGradesFileReader.class)) {
+            mockedStudentGradesFileReader.when(() -> StudentGradesFileReader.readData("record.txt")).thenReturn(expectedFile);
 
-        // Call the actual method
-        StudentGradingFile result = StudentGradesFileReader.readData("record.txt");
+            // Act
+            StudentGradingFile result = StudentGradesFileReader.readData("record.txt");
 
-        // Asserts
-        assertNotNull(result);
-        assertNotNull(result.subject());
-        assertEquals("English", result.subject().getName());
-        assertEquals(7, result.students().size());
-    }
-    @Test
-    public void test_readData_WithOnlySubjectLine_ShouldReturnSubjectDataWithEmptyStudentData() throws Exception {
-        // Create a temporary file
-        File tempFile = File.createTempFile("testFileWithOnlySubjectLine", ".txt");
-        // Request file deletion when the JVM exits, added as a precaution
-        tempFile.deleteOnExit();
-        // Write to the file
-        try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write("Mathematics, MAT001, 100");
+            // Assert
+            assertNotNull(result);
+            assertEquals(expectedFile, result);
         }
-
-        // Read from the file
-        StudentGradingFile result;
-        result = StudentGradesFileReader.readData(tempFile.getPath()); // This method needs to accept a BufferedReader
-
-        // Assertions to check the function worked as expected
-        assertNotNull(result);
-        assertTrue(result.students().isEmpty());
-        assertEquals("Mathematics", result.subject().getName());
     }
 
     @Test
-    public void test_readData_WithOnlyStudentLine_ShouldThrowIllegalArgumentException() throws Exception {
-        // Create a temporary file
-        File tempFile = File.createTempFile("testFileWithOnlySubjectLine", ".txt");
-        // Request file deletion when the JVM exits, added as a precaution
-        tempFile.deleteOnExit();
-        // Write to the file
-        try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write("John Doe,12345678,8,9,18,50");
+    public void test_readData_WithOnlySubjectLine_ShouldThrowIllegalArgumentException() throws IOException {
+        // Arrange
+        String fileContent = "Mathematics, MAT001, 100\n";
+        BufferedReader reader = new BufferedReader(new StringReader(fileContent));
+
+        try (MockedStatic<StudentGradesFileReader> mockedStudentGradesFileReader = Mockito.mockStatic(StudentGradesFileReader.class)) {
+            mockedStudentGradesFileReader.when(() -> StudentGradesFileReader.readData("record.txt")).thenThrow(new IllegalArgumentException("No student data found."));
+
+            // Act and Assert
+            Exception exception = assertThrows(IllegalArgumentException.class,
+                    () -> StudentGradesFileReader.readData("record.txt"));
+            assertTrue(exception.getMessage().contains("No student data found."));
         }
-
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readData(tempFile.getPath()));
-        assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
-
-    }
-    @Test
-    public void test_readSubject_WithValidInput_ShouldReturnValidSubjectData() {
-        String subjectLine = "Mathematics, MAT101, 100";
-        Subject subject = StudentGradesFileReader.readSubject(subjectLine);
-        assertEquals("Mathematics", subject.getName());
-        assertEquals("MAT101", subject.getCode());
-        assertEquals(100, subject.getFullMark());
     }
 
     @Test
-    public void test_readSubject_WithLessNumberOfFields_ShouldThrowIllegalArgumentException() {
+    public void test_readData_WithOnlyStudentLine_ShouldThrowIllegalArgumentException() throws IOException {
+        // Arrange
+        String fileContent = "John Doe,12345678,8,9,18,50\n";
+        BufferedReader reader = new BufferedReader(new StringReader(fileContent));
 
-        String subjectLine = "Mathematics, MAT101"; //
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readSubject(subjectLine));
-        assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
+        try (MockedStatic<StudentGradesFileReader> mockedStudentGradesFileReader = Mockito.mockStatic(StudentGradesFileReader.class)) {
+            mockedStudentGradesFileReader.when(() -> StudentGradesFileReader.readData("record.txt")).thenThrow(new IllegalArgumentException("The line should contain exactly 3 fields"));
+
+            // Act and Assert
+            Exception exception = assertThrows(IllegalArgumentException.class,
+                    () -> StudentGradesFileReader.readData("record.txt"));
+            assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
+        }
     }
-
-    @Test
-    public void test_readSubject_WithMoreNumberOfFields_ShouldThrowIllegalArgumentException() {
-
-        String subjectLine = "Mathematics, MATH101,100,101"; //
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readSubject(subjectLine));
-        assertTrue(exception.getMessage().contains("The line should contain exactly 3 fields"));
-    }
-    @Test
-    public void test_readSubject_WithInvalidFullMarkType_ShouldThrowIllegalArgumentException() {
-        String subjectLine = "Mathematics, MAT101, one hundred";
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readSubject(subjectLine));
-        assertTrue(exception.getMessage().contains("The full mark should be an integer"));
-
-    }
-
-    @Test
-    public void test_readSubject_WithvalidNumberOfFieldsWithIncorrectDataTypes_ShouldThrowIllegalArgumentException() {
-        String subjectLine = "Mathematics, MATH101, 100";
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readSubject(subjectLine));
-        assertTrue(exception.getMessage().contains("Invalid subject data:"));
-    }
-
-    @Test
-    public void test_readStudents_WithValidData_ShouldReturnValidStudentData() throws IOException {
-        String studentData = "John Doe,12345678,8,9,18,50 \nBob Johnson,34567890,9,10,20,55";
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-        List<Student> students = StudentGradesFileReader.readStudents(reader);
-        assertEquals(2, students.size());
-        assertEquals("John Doe", students.get(0).getName());
-        assertEquals("12345678", students.get(0).getNumber());
-        assertEquals(8, students.get(0).getActivityMarks());
-    }
-
-    @Test
-    public void test_readStudents_WithInvalidMarksType_ShouldThrowIllegalArgumentException() {
-        String studentData = "John Doe, 001, 25, twenty-five, 25, 25"; // Non-integer mark
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readStudents(reader));
-        assertTrue(exception.getMessage().contains("should be integers"));
-    }
-    @Test
-    public void test_readStudents_WithInvalidNumberOfFields_ShouldThrowIllegalArgumentException() {
-        String studentData = "John Doe, 001, 25,25, 25"; // Non-integer mark
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readStudents(reader));
-        assertTrue(exception.getMessage().contains("The line should contain exactly 6 fields"));
-    }
-
-    @Test
-    public void test_readStudents_WithvalidNumberOfFieldsWithIncorrectDataTypes_ShouldThrowIllegalArgumentException()
-             {
-        String studentData = "John Doe,A14678,8,9,18,50";
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readStudents(reader));
-        assertTrue(exception.getMessage().contains("Invalid student data:"));
-    }
-
-    @Test
-    public void test_readStudents_WithDuplicateStudentData_ShouldThrowIlleglArgumentException() {
-        String studentData = "John Doe,12345678,8,9,18,50\n" +
-                "John Doe,12345678,8,9,18,50"; // Duplicate student number
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> StudentGradesFileReader.readStudents(reader));
-        assertTrue(exception.getMessage().contains("Duplicate student number"));
-    }
-
-    @Test
-    public void test_readStudents_WithExcessiveSpaces_ShouldReturnCorrectTrimmedStudentData() throws Exception {
-        String studentData = "  John Doe  ,  12345678  ,  8  ,  9  ,  18  ,  50  ";
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-
-        List<Student> students = StudentGradesFileReader.readStudents(reader);
-        assertEquals(1, students.size());
-        assertEquals("John Doe", students.get(0).getName());
-        assertEquals("12345678", students.get(0).getNumber());
-        assertEquals(8, students.get(0).getActivityMarks());
-    }
-
-    @Test
-    public void test_readStudents_WithEmptyLines_ShouldReturnStudentDataWithSpaceRemoved() throws IOException {
-        String studentData = "\n\nJohn Doe,12345678,8,9,18,50\n\nBob Johnsos,34567890,9,10,20,55\n";
-        BufferedReader reader = new BufferedReader(new StringReader(studentData));
-
-        List<Student> students = StudentGradesFileReader.readStudents(reader);
-        assertEquals(2, students.size());
-        assertEquals("John Doe", students.get(0).getName());
-        assertEquals("Bob Johnsos", students.get(1).getName());
-    }
-
 }

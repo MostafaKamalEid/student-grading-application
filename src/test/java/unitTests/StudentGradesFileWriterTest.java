@@ -107,9 +107,11 @@ public class StudentGradesFileWriterTest {
 
     @Test
     public void testWriteDataWithIOException() {
-        // Assert that an IllegalArgumentException is thrown for IO exception
+        // Assert that an IllegalArgumentException is thrown for IO exception when writing to the file
+
         assertThrows(NullPointerException.class,
                 () -> StudentGradesFileWriter.writeData("invalidFilePath.txt", studentGradingMock));
+
     }
 
     @Test
