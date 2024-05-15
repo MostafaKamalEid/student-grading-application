@@ -145,8 +145,7 @@ class MainFunctionBlackboxTests {
     }
     @Test
     void testMain_invalidSubjectCode_withLessThan7Char()  {
-        String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withLessThan7Char.txt"; // Change this to the desired file path
-
+        String filePath = Paths.get("src", "test", "java", "blackBoxTests", "invalidSubjectCode_withLessThan7Char.txt").toString();
         String[] arguments = new String[] {filePath};
         // expected output list of lines
         ArrayList<String> expectedOutputList =  new ArrayList<>();
