@@ -169,13 +169,20 @@ class MainFunctionBlackboxTests {
         String capturedOutput = outputStream.toString();
         // print the captured output
         System.out.println(capturedOutput);
-        // print the expected output
-        System.out.println(expectedOutputList);
-        // Check if the expected output List is contained in the captured output string
-        for (String line : expectedOutputList) {
-
-            assertTrue(capturedOutput.contains(line.trim()));
+        // sperate capturedOutput by lines and store in a list of strings but split by /n and remove empty lines and /r
+        String[] capturedOutputArray = capturedOutput.split("\n");
+        ArrayList<String> capturedOutputList = new ArrayList<>();
+        for (String line : capturedOutputArray) {
+            if (!line.isEmpty() && !line.equals("\r")) {
+                capturedOutputList.add(line);
+            }
         }
+
+        // check if every line in order is equal to the expected output
+        for (int i = 0; i < expectedOutputList.size(); i++) {
+            assertEquals(expectedOutputList.get(i).trim(), capturedOutputList.get(i).trim());
+        }
+
 
     }
     @Test
