@@ -18,7 +18,7 @@ class MainFunctionBlackboxTests {
 
 
 	@Test
-	void testMain_withValidData_studentCodeWitoutS_ShouldNotThrowException() throws IOException {
+	void testMain_withValidData_studentCodeWithoutS_ShouldNotThrowException() throws IOException {
 		String filePath = "src/test/java/blackBoxTests/ValidData.txt"; // Change this to the desired file path
 
         try {
@@ -56,12 +56,12 @@ class MainFunctionBlackboxTests {
 	}
 
     @Test
-    void testMain_invalidSubjectNameAndCode_containSpecialCharacter() throws IOException {
+    void testMain_invalidSubjectNameAndCode_containSpecialCharacter()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectNameAndCode.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics!,MTH12@,100");
         expectedOutputList.add("Reason: Invalid name");
         // Create a ByteArrayOutputStream to capture the output
@@ -86,12 +86,12 @@ class MainFunctionBlackboxTests {
         
     }
     @Test
-    void testMain_invalidSubjectCode_continsCapitalS() throws IOException {
+    void testMain_invalidSubjectCode_ContinsCapitalS()  {
         String filePath = "src/test/java/blackBoxTests/invalidStudentCode_withCapitalS.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH123S,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -115,12 +115,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidSubjectCode_withMoreThan7Char() throws IOException {
+    void testMain_invalidSubjectCode_withMoreThan7Char()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withMoreThan7Char.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH1234s,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -144,12 +144,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidSubjectCode_withLessThan7Char() throws IOException {
+    void testMain_invalidSubjectCode_withLessThan7Char()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withLessThan7Char.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH12,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -173,12 +173,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidSubjectCode_withAlphabeticChar() throws IOException {
+    void testMain_invalidSubjectCode_withAlphabeticChar()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withAlphabeticChar"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTHFFF,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -202,12 +202,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidSubjectCode_withNumbers() throws IOException {
+    void testMain_invalidSubjectCode_withNumbers()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withNumbers.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,123456,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -231,12 +231,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidSubjectCode_withSpecialChar() throws IOException {
+    void testMain_invalidSubjectCode_withSpecialChar()  {
         String filePath = "src/test/java/blackBoxTests/invalidSubjectCode_withSpecialChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH12@,100");
         expectedOutputList.add("Reason: Invalid code");
         // Create a ByteArrayOutputStream to capture the output
@@ -260,12 +260,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidFullMark_wihNumberOtherThan100() throws IOException {
+    void testMain_invalidFullMark_wihNumberOtherThan100()  {
         String filePath = "src/test/java/blackBoxTests/invalidFullMark_wihNumberOtherThan100.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH123,60");
         expectedOutputList.add("Reason: Invalid full mark");
         // Create a ByteArrayOutputStream to capture the output
@@ -289,12 +289,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidFullMark_wihAlphabeticChar() throws IOException {
+    void testMain_invalidFullMark_wihAlphabeticChar()  {
         String filePath = "src/test/java/blackBoxTests/invalidFullMark_wihAlphabeticChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics,MTH123,Hundred");
         expectedOutputList.add("Reason: The full mark should be an integer.");
         // Create a ByteArrayOutputStream to capture the output
@@ -318,12 +318,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidStudentName_wihSpecialChar() throws IOException {
+    void testMain_invalidStudentName_wihSpecialChar()  {
         String filePath = "src/test/java/blackBoxTests/invalidStudentName_wihSpecialChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
         expectedOutputList.add("Invalid student data: John$ Doe,1234567,8,9,18,50");
         expectedOutputList.add("Reason: Invalid name");
         // Create a ByteArrayOutputStream to capture the output
@@ -347,12 +347,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidStudentName_wihSomeSpaces() throws IOException {
+    void testMain_invalidStudentName_wihSomeSpaces() {
         String filePath = "src/test/java/blackBoxTests/invalidStudentName_wihSomeSpaces.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data:    n Doe,1234567,8,9,18,50");
         expectedOutputList.add("Reason: Invalid name");
         // Create a ByteArrayOutputStream to capture the output
@@ -376,12 +376,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidStudentNumber_wihMoreThan8Num() throws IOException {
+    void testMain_invalidStudentNumber_wihMoreThan8Num() {
         String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_wihMoreThan8Num.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,123456789,8,9,18,50");
         expectedOutputList.add("Reason: Invalid number");
         // Create a ByteArrayOutputStream to capture the output
@@ -405,12 +405,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidStudentNumber_withLessThan8Num() throws IOException {
+    void testMain_invalidStudentNumber_withLessThan8Num() {
         String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_withLessThan8Num.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18,50");
         expectedOutputList.add("Reason: Invalid number");
         // Create a ByteArrayOutputStream to capture the output
@@ -447,12 +447,12 @@ class MainFunctionBlackboxTests {
         assertEquals(-1, mismatch);
     }
     @Test
-    void testMain_invalidStudentNumber_containingSpecialNonAlphanumericChar() throws IOException {
+    void testMain_invalidStudentNumber_containingSpecialNonAlphanumericChar() {
         String filePath = "src/test/java/blackBoxTests/invalidStudentNumber_containingSpecialNonAlphanumericChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,1234567@,8,9,18,50");
         expectedOutputList.add("Reason: Invalid number");
         // Create a ByteArrayOutputStream to capture the output
@@ -475,12 +475,12 @@ class MainFunctionBlackboxTests {
             assertTrue(capturedOutput.contains(line));
         }}
     @Test
-    void testMain_invalidActivityMark_containsSpecialChar() throws IOException {
+    void testMain_invalidActivityMark_containsSpecialChar() {
         String filePath = "src/test/java/blackBoxTests/invalidActivityMark_containsSpecialChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,12345678,!,9,18,50");
         expectedOutputList.add("Reason: The activity marks, oral marks, midterm marks and final marks should be integers.");
         // Create a ByteArrayOutputStream to capture the output
@@ -504,12 +504,12 @@ class MainFunctionBlackboxTests {
       }
     }
     @Test
-    void testMain_invalidOralMark_containsAlphabeticChar() throws IOException {
+    void testMain_invalidOralMark_containsAlphabeticChar() {
         String filePath = "src/test/java/blackBoxTests/invalidOralMark_containsAlphabeticChar.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,12345678,9,A,18,50");
         expectedOutputList.add("Reason: The activity marks, oral marks, midterm marks and final marks should be integers.");
         // Create a ByteArrayOutputStream to capture the output
@@ -532,12 +532,12 @@ class MainFunctionBlackboxTests {
             assertTrue(capturedOutput.contains(line));
         }}
     @Test
-    void testMain_invalidPracticalMark_containsNegativeNum() throws IOException {
+    void testMain_invalidPracticalMark_containsNegativeNum() {
         String filePath = "src/test/java/blackBoxTests/invalidPracticalMark_containsNegativeNum.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,12345678,9,-9,18,50");
         expectedOutputList.add("Reason: Invalid oral marks");
         // Create a ByteArrayOutputStream to capture the output
@@ -561,12 +561,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_invalidMidtermMark_containingHigherThanMax() throws IOException {
+    void testMain_invalidMidtermMark_containingHigherThanMax() {
         String filePath = "src/test/java/blackBoxTests/invalidMidtermMark_containingHigherThanMax.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,12345678,9,9,21,50");
         expectedOutputList.add("Reason: Invalid mid marks");
         // Create a ByteArrayOutputStream to capture the output
@@ -590,12 +590,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_missingFinalExamMark() throws IOException {
+    void testMain_missingFinalExamMark() {
         String filePath = "src/test/java/blackBoxTests/missingFinalExamMark.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,12345678,9,9,18,");
         expectedOutputList.add("Reason: The activity marks, oral marks, midterm marks and final marks should be integers.");
         // Create a ByteArrayOutputStream to capture the output
@@ -619,12 +619,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_invalidFileFormate() throws IOException {
-        String filePath = "src/test/java/blackBoxTests/invalidFileFormate.json"; // Change this to the desired file path
+    void testMain_invalidFileFormat() {
+        String filePath = "src/test/java/blackBoxTests/invalidFileFormat.json"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid subject data: null");
         expectedOutputList.add("Reason: The line should contain exactly 3 fields separated by commas.");
         // Create a ByteArrayOutputStream to capture the output
@@ -648,12 +648,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_emptyFile() throws IOException {
+    void testMain_emptyFile() {
         String filePath = "src/test/java/blackBoxTests/emptyFile.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid subject data: null");
         expectedOutputList.add("Reason: The line should contain exactly 3 fields separated by commas.");
         // Create a ByteArrayOutputStream to capture the output
@@ -677,12 +677,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_recordsSeparatedBySemicolons() throws IOException {
+    void testMain_recordsSeparatedBySemicolons() {
         String filePath = "src/test/java/blackBoxTests/recordsSeparatedBySemicolons.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid subject data: Mathematics;MTH123;100");
         expectedOutputList.add("Reason: The line should contain exactly 3 fields separated by commas.");
         // Create a ByteArrayOutputStream to capture the output
@@ -706,12 +706,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_emptySubjectInfo_separatedByCommas() throws IOException {
+    void testMain_emptySubjectInfo_separatedByCommas() {
         String filePath = "src/test/java/blackBoxTests/emptySubjectInfo_separatedByCommas.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid subject data: ,,");
         expectedOutputList.add("Reason: The line should contain exactly 3 fields separated by commas.");
         // Create a ByteArrayOutputStream to capture the output
@@ -735,12 +735,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_emptyLinesOnStudentRecords() throws IOException {
+    void testMain_emptyLinesOnStudentRecords() {
         String filePath = "src/test/java/blackBoxTests/emptyLinesOnStudentRecords.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("No student data found.");
         // Create a ByteArrayOutputStream to capture the output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -763,12 +763,12 @@ class MainFunctionBlackboxTests {
         }
     }
     @Test
-    void testMain_multipleStudentRecordsOnTheSameLine() throws IOException {
+    void testMain_multipleStudentRecordsOnTheSameLine() {
         String filePath = "src/test/java/blackBoxTests/multipleStudentRecordsOnTheSameLine.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18,50 John Doe,1234567,8,9,18,50");
         expectedOutputList.add("Reason: The line should contain exactly 6 fields separated by commas.");
         // Create a ByteArrayOutputStream to capture the output
@@ -792,12 +792,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_spaceBeforeActivitiesMark() throws IOException {
+    void testMain_spaceBeforeActivitiesMark() {
         String filePath = "src/test/java/blackBoxTests/spaceBeforeActivitiesMark.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,1234567, 8,9,18,50");
         expectedOutputList.add("Reason: Invalid number");
         // Create a ByteArrayOutputStream to capture the output
@@ -821,12 +821,12 @@ class MainFunctionBlackboxTests {
         }
         }
     @Test
-    void testMain_spaceAfterMidtermMark() throws IOException {
+    void testMain_spaceAfterMidtermMark() {
         String filePath = "src/test/java/blackBoxTests/spaceAfterMidtermMark.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
-        ArrayList<String> expectedOutputList =  new ArrayList<String>();
+        ArrayList<String> expectedOutputList = new ArrayList<>();
         expectedOutputList.add("Invalid student data: John Doe,1234567,8,9,18 ,50");
         expectedOutputList.add("Reason: Invalid number");
         // Create a ByteArrayOutputStream to capture the output
