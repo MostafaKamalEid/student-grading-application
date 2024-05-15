@@ -10,6 +10,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
 
 public class StudentTest {
+    @Test
+    public void testValidateNumber_NullNumber_ShouldReturnFalse() {
+        String number = null;
+        assertFalse(StudentValidator.validateNumber(number));
+    }
+
+    @Test
+    public void testValidateNumber_EmptyNumber_ShouldReturnFalse() {
+        String number = "";
+        assertFalse(StudentValidator.validateNumber(number));
+    }
+
+    @Test
+    public void testValidateNumber_BlankNumber_ShouldReturnFalse() {
+        String number = " ";
+        assertFalse(StudentValidator.validateNumber(number));
+    }
 
     @Test
     public void testSetName_ValidName_ShouldSetTheName() {

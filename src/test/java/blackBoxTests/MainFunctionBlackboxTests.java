@@ -16,7 +16,38 @@ import student.project.Main;
 
 class MainFunctionBlackboxTests {
 
+    @Test
+    void testMain_noArguments_shouldThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> Main.main(new String[] {}));
+    }
+    @Test
+    void testMain_duplicateStudentNumbers_shouldThrowException() {
+        String filePath = "src/test/java/blackBoxTests/invalidtest_duplicateStudents.txt"; // Change this to the desired file path
 
+        String[] arguments = new String[] {filePath};
+        // expected output list of lines
+        ArrayList<String> expectedOutputList =  new ArrayList<>();
+        expectedOutputList.add("Duplicate student number:");
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+        // Call the main method with the arguments
+        Main.main(arguments);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalOut);
+
+        // Get the captured output as a string
+        String capturedOutput = outputStream.toString();
+        // Check if the expected output List is contained in the captured output string
+        for (String line : expectedOutputList) {
+            assertTrue(capturedOutput.contains(line));
+        }
+    }
 	@Test
 	void testMain_withValidData_studentCodeWithoutS_ShouldNotThrowException() throws IOException {
 		String filePath = "src/test/java/blackBoxTests/ValidData.txt"; // Change this to the desired file path
