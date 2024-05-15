@@ -167,10 +167,16 @@ class MainFunctionBlackboxTests {
 
         // Get the captured output as a string
         String capturedOutput = outputStream.toString();
+        // print the captured output
+        System.out.println(capturedOutput);
+        // print the expected output
+        System.out.println(expectedOutputList);
         // Check if the expected output List is contained in the captured output string
         for (String line : expectedOutputList) {
+
             assertTrue(capturedOutput.contains(line.trim()));
         }
+
     }
     @Test
     void testMain_invalidSubjectCode_withAlphabeticChar()  {
