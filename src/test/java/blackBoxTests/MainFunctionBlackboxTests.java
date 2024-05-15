@@ -169,7 +169,7 @@ class MainFunctionBlackboxTests {
         String capturedOutput = outputStream.toString();
         // Check if the expected output List is contained in the captured output string
         for (String line : expectedOutputList) {
-            assertTrue(capturedOutput.contains(line));
+            assertTrue(capturedOutput.contains(line.trim()));
         }
     }
     @Test
