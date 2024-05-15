@@ -24,6 +24,7 @@ public class StudentGradesFileWriter {
             writeSubject(writer, studentGradingFile.subject());
             // write the students
             writeStudents(writer, studentGradingFile.students());
+            writer.flush();
             writer.close();
         }
         catch (IOException e) {
