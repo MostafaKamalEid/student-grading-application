@@ -741,7 +741,7 @@ class MainFunctionBlackboxTests {
         String[] arguments = new String[] {filePath};
         // expected output list of lines
         ArrayList<String> expectedOutputList =  new ArrayList<String>();
-        expectedOutputList.add("Empty lines on student records");
+        expectedOutputList.add("No student data found.");
         // Create a ByteArrayOutputStream to capture the output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
@@ -761,7 +761,7 @@ class MainFunctionBlackboxTests {
         for (String line : expectedOutputList) {
             assertTrue(capturedOutput.contains(line));
         }
-        }
+    }
     @Test
     void testMain_multipleStudentRecordsOnTheSameLine() throws IOException {
         String filePath = "src/test/java/blackBoxTests/multipleStudentRecordsOnTheSameLine.txt"; // Change this to the desired file path

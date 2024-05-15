@@ -123,11 +123,11 @@ public class StudentGradesFileReaderTest {
     }
 
     @Test
-    public void testReadStudents_EmptyInput_NoExceptionThorws_ContinueToNextLine() {
+    public void testReadStudents_EmptyInput_ShouldThrowIllegalArgumentException() {
         BufferedReader reader = new BufferedReader(new StringReader("\n"));
-        assertDoesNotThrow(() -> StudentGradesFileReader.readStudents(reader));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> StudentGradesFileReader.readStudents(reader));
+        assertEquals("No student data found.", exception.getMessage());
     }
-
     @Test
     public void testReadStudents_LessThanSixFields() {
         BufferedReader reader = new BufferedReader(new StringReader("John Doe,1234567A,10,10,20\n"));

@@ -82,7 +82,7 @@ public class StudentGradesFileReader {
             int midMarks;
             int finalMarks;
             try{
-                name = studentData[0].trim();
+                name = studentData[0];
                 number = studentData[1].trim();
                 activityMarks = Integer.parseInt(studentData[2].trim());
                 oralMarks = Integer.parseInt(studentData[3].trim());
@@ -112,6 +112,10 @@ public class StudentGradesFileReader {
             }
         }
 
+        // check if the student list is empty
+        if (students.isEmpty()) {
+            throw new IllegalArgumentException("No student data found.");
+        }
         return students;
     }
 }

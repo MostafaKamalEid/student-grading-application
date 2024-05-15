@@ -82,9 +82,19 @@ public class ReaderTest {
     }
 
     @Test
-    public void testReadStudents_EmptyInput_NoExceptionThorws_ContinueToNextLine() {
-        BufferedReader reader = new BufferedReader(new StringReader("\n"));
-        assertDoesNotThrow(() -> StudentGradesFileReader.readStudents(reader));
+    public void test_readStudents_WithEmptyFile_ShouldThrowIllegalArgumentException() throws IOException {
+        // Create a temporary file with no student data
+        Path tempFile = Files.createTempFile("temp", ".txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile.toString()));
+        writer.close();
+
+        BufferedReader reader = new BufferedReader(new FileReader(tempFile.toString()));
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            StudentGradesFileReader.readStudents(reader);
+        });
+
+        assertEquals("No student data found.", exception.getMessage());
     }
 
     @Test
