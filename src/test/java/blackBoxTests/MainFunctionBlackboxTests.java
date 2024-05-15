@@ -22,7 +22,7 @@ class MainFunctionBlackboxTests {
     }
     @Test
     void testMain_duplicateStudentNumbers_shouldThrowException() {
-        String filePath = "src/test/java/blackBoxTests/invalidtest_duplicateStudents.txt"; // Change this to the desired file path
+        String filePath = "src/test/java/blackBoxTests/invalidDuplicateStudents.txt"; // Change this to the desired file path
 
         String[] arguments = new String[] {filePath};
         // expected output list of lines
