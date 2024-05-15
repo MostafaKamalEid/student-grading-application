@@ -37,3 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 /nbproject/
+
+### Project ###
+# remove any file ending with _output.txt
+*_output.txt
